@@ -47,7 +47,7 @@ function ArchitectSelector({ architects, selectedArchitect, onArchitectSelect })
   return (
     <div className="flex flex-col">
         <input type="text" placeholder="Search architects..." value={filterText} onChange={(e) => setFilterText(e.target.value)} className="w-full px-3 py-1.5 border border-stone-300 rounded-md focus:ring-1 focus:ring-teal-500 focus:border-teal-500 text-sm mb-2"/>
-        <div className="filter-scrollbar flex-grow overflow-y-auto max-h-60 border-t border-stone-200 pt-2">
+        <div className="filter-scrollbar flex-grow overflow-y-auto max-h-36 border-t border-stone-200 pt-2">
             <div className="px-1 py-1">
               <label className="flex items-center space-x-2 cursor-pointer">
                 <input type="radio" name="architect-selector" value="" checked={!selectedArchitect} onChange={() => onArchitectSelect(null)} className="form-radio h-4 w-4 text-teal-600 focus:ring-teal-500"/>
@@ -79,7 +79,7 @@ function LocationSelector({ locations, selectedLocation, onLocationSelect }) {
   return (
     <div className="flex flex-col">
         <input type="text" placeholder="Search countries..." value={filterText} onChange={(e) => setFilterText(e.target.value)} className="w-full px-3 py-1.5 border border-stone-300 rounded-md focus:ring-1 focus:ring-teal-500 focus:border-teal-500 text-sm mb-2"/>
-        <div className="filter-scrollbar flex-grow overflow-y-auto max-h-60 border-t border-stone-200 pt-2">
+        <div className="filter-scrollbar flex-grow overflow-y-auto max-h-36 border-t border-stone-200 pt-2">
             <div className="px-1 py-1">
               <label className="flex items-center space-x-2 cursor-pointer">
                 <input type="radio" name="location-selector" value="" checked={!selectedLocation} onChange={() => onLocationSelect(null)} className="form-radio h-4 w-4 text-teal-600 focus:ring-teal-500"/>
