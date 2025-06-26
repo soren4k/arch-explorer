@@ -36,6 +36,25 @@ function FilterCard({ title, children, className = '' }) {
     );
 }
 
+/* ---------- URL helpers ---------- */
+function criteriaToSearchParams({ architect, location, tags }) {
+  const params = new URLSearchParams();
+  if (architect) params.set('architect', architect);
+  if (location)  params.set('location',  location);
+  if (tags && tags.length) params.set('tags', tags.join(','));   // comma-list
+  return params.toString();       // "" if nothing selected
+}
+
+function searchParamsToCriteria(search) {
+  const params = new URLSearchParams(search);
+  return {
+    architect : params.get('architect') || null,
+    location  : params.get('location')  || null,
+    tags      : params.get('tags') ? params.get('tags').split(',') : []
+  };
+}
+
+
 function ArchitectSelector({ architects, selectedArchitect, onArchitectSelect }) {
   const [filterText, setFilterText] = React.useState("");
   const filteredArchitects = React.useMemo(() => {
@@ -754,14 +773,31 @@ function App() {
       });
   }, []);
 
+  // --- ONE-TIME: look for ?architect=&location=&tags= in the URL ---
+  React.useEffect(() => {
+    const initial = searchParamsToCriteria(window.location.search);
+    // if at least one field is filled, jump straight to Results view
+    if (initial.architect || initial.location || initial.tags.length) {
+      setCurrentSearchCriteria(initial);
+      setView('results');
+    }
+  }, []);   // ← run only once
+
   const handleSearch = (criteria) => {
     setCurrentSearchCriteria(criteria);
     setView('results');
+
+    // push ?architect=&location=&tags= into the address bar
+    const qs = criteriaToSearchParams(criteria);
+    const newUrl = qs ? `?${qs}` : window.location.pathname;   // stay on /
+    window.history.pushState(null, '', newUrl);
   };
+
 
   const handleHome = () => {
     setView('search');
     setCurrentSearchCriteria({ tags: [], architect: null, location: null });
+    window.history.pushState(null, '', window.location.pathname);   // wipe query
   };
 
   const renderView = () => {
