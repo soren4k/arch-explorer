@@ -2,7 +2,7 @@
 
 A tagged dataset of architectural photographs, built in Professor David Kirsh's XR Lab at UC San Diego (Spring 2025). It powers the image search tool here: [https://soren4k.github.io/arch-explorer/](https://soren4k.github.io/arch-explorer/)
 
-The whole dataset is one file, `googlemedia\_data.json` (about 36 MB). It holds two things:
+The whole dataset is one file, `googlemedia_data.json` (about 36 MB). It holds two things:
 
 1. **The tag taxonomy**: every tag the AI tagger was allowed to use, organised into categories.
 
